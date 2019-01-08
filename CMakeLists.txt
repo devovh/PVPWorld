@@ -8,7 +8,7 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-# CMake policies (can not be handled elsewhere)
+# CMake policies (can not be handled elsewhere) this needs to be updated...
 cmake_minimum_required(VERSION 2.6)
 cmake_policy(SET CMP0005 OLD)
 if(POLICY CMP0053)
