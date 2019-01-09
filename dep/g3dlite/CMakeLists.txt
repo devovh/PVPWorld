@@ -57,7 +57,7 @@ set(g3dlib_STAT_SRCS
 if(WIN32)
   include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/dep/zlib
+	${ZLIB_INCLUDE_DIR}
   )
 else()
   include_directories(
@@ -66,7 +66,3 @@ else()
 endif()
 
 add_library(g3dlib STATIC ${g3dlib_STAT_SRCS})
-
-target_link_libraries(g3dlib
-  ${ZLIB_LIBRARIES}
-)

@@ -23,10 +23,10 @@ set(Recast_STAT_SRCS
 
 if(WIN32)
   include_directories(
-    ${CMAKE_SOURCE_DIR}/dep/zlib
+    ${ZLIB_INCLUDE_DIR}
   )
 endif()
 
 add_library(Recast STATIC ${Recast_STAT_SRCS})
 
-target_link_libraries(Recast ${ZLIB_LIBRARIES})
+#target_link_libraries(Recast ${ZLIB_LIBRARIES})

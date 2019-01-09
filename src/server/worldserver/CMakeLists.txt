@@ -177,9 +177,10 @@ target_link_libraries(worldserver
   ${MYSQL_LIBRARY}
   ${OPENSSL_LIBRARIES}
   ${OPENSSL_EXTRA_LIBRARIES}
-  ${ZLIB_LIBRARIES}
+  zdll
   ${OSX_LIBS}
 )
+
 
 if( WIN32 )
   add_custom_command(TARGET worldserver
