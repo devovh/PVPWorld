@@ -1352,6 +1352,7 @@ class spell_warr_charge : public SpellScriptLoader
             DOUBLE_TIME        = 103827,
             WARBRINGER         = 103828,
             WARBRINGER_STUN    = 105771,
+			WARBRINGER_SLOW	   = 137637,
             DOUBLE_TIME_MARKER = 124184,
             FIRE_VISUAL        = 96840,
             BLAZING_TRAIL      = 123779
@@ -1369,7 +1370,7 @@ class spell_warr_charge : public SpellScriptLoader
             return true;
         }
 
-        void HandleCharge()
+        void HandleCharge(SpellEffIndex)
         {
             Unit* target = GetHitUnit();
             Unit* caster = GetCaster();
@@ -1398,7 +1399,7 @@ class spell_warr_charge : public SpellScriptLoader
 
         void Register()
         {
-            OnEffectHitTarget += SpellEffectFn(script_impl::HandleCharge, EFFECT_0, SPELL_EFFECT_CHARGE);
+			OnEffectHitTarget += SpellEffectFn(script_impl::HandleCharge, EFFECT_0, SPELL_EFFECT_CHARGE);
             OnEffectHitTarget += SpellEffectFn(script_impl::HandleDummy, EFFECT_1, SPELL_EFFECT_DUMMY);
         }
     };

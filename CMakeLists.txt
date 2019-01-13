@@ -9,10 +9,11 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 # CMake policies (can not be handled elsewhere)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-IF(POLICY CMP0074)
-	cmake_policy(SET CMP0074 NEW)
-ENDIF()
+cmake_minimum_required(VERSION 2.6)
+cmake_policy(SET CMP0005 OLD)
+if(POLICY CMP0053)
+    cmake_policy(SET CMP0053 OLD)
+endif()
 
 # Set projectname (must be done AFTER setting configurationtypes)
 project(JadeCore)
