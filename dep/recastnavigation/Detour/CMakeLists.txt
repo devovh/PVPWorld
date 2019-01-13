@@ -19,10 +19,10 @@ set(Detour_STAT_SRCS
 
 if(WIN32)
   include_directories(
-    ${ZLIB_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/dep/zlib
   )
 endif()
 
 add_library(Detour STATIC ${Detour_STAT_SRCS})
 
-#target_link_libraries(Detour ${ZLIB_LIBRARIES})
+target_link_libraries(Detour ${ZLIB_LIBRARIES})
