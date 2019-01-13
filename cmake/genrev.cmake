@@ -13,9 +13,11 @@ include(${CMAKE_SOURCE_DIR}/cmake/macros/EnsureVersion.cmake)
 # Last minute check - ensure that we have a proper revision
 # If everything above fails (means the user has erased the git revision control directory or removed the origin/HEAD tag)
 if(NOT rev_info)
-	string(TIMESTAMP TODAY "%Y-%m-%d %H:%M:%S")
-	set(rev_date ${TODAY})
-	set(rev_hash "Archived")
+  # No valid ways available to find/set the revision/hash, so let's force some defaults
+  message(STATUS "WARNING - Missing repository tags - you may need to pull tags with git fetch -t")
+  message(STATUS "WARNING - Continuing anyway - note that the versionstring will be set to 0000-00-00 00:00:00 (Archived)")
+  set(rev_date "0000-00-00 00:00:00 +0000")
+  set(rev_hash "Archived")
 else()
   # Extract information required to build a proper versionstring
   string(REGEX REPLACE init-|[0-9]+-g "" rev_hash ${rev_info})

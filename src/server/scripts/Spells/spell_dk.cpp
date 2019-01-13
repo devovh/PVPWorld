@@ -1891,16 +1891,36 @@ class spell_dk_death_grip : public SpellScriptLoader
         class spell_dk_death_grip_SpellScript : public SpellScript
         {
             PrepareSpellScript(spell_dk_death_grip_SpellScript);
+			const SpellInfo *info;
+
+			bool Load()
+			{
+				info = sSpellMgr->GetSpellInfo(49575);
+				return true;
+			}
+
 
             void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 int32 damage = GetEffectValue();
-                Position const* pos = GetExplTargetDest();
-                if (Unit* target = GetHitUnit())
+                Position pos;
+				Unit* target = GetHitUnit();
+                if (target == GetSpell()->GetUnitTarget())
                 {
-                    if (!target->HasAuraType(SPELL_AURA_DEFLECT_SPELLS)) // Deterrence
-                        target->CastSpell(pos->GetPositionX(), pos->GetPositionY(), pos->GetPositionZ(), damage, true);
+					pos = *GetExplTargetDest();
                 }
+				else
+				{
+					Unit * unitTarget = GetSpell()->GetUnitTarget();
+					unitTarget->GetContactPoint(target, pos.m_positionX, pos.m_positionY, pos.m_positionZ);
+					float angle = unitTarget->GetRelativeAngle(target);
+					unitTarget->GetFirstCollisionPosition(pos, unitTarget->GetObjectSize(), angle);
+				}
+				if (target)
+				{
+					if (!target->HasAuraType(SPELL_AURA_DEFLECT_SPELLS) && !target->IsImmunedToSpell(info) && !target->HasAura(31244)) // Deterrence
+						target->CastSpell(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ(), damage, true);
+				}
             }
 
             void Register()

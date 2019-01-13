@@ -1378,6 +1378,9 @@ class spell_warr_charge : public SpellScriptLoader
 
             uint32 stunSpellId = caster->HasAura(WARBRINGER) ? WARBRINGER_STUN : CHARGE_STUN;
             caster->CastSpell(target, stunSpellId, true);
+			
+			if (caster->HasAura(WARBRINGER))
+				caster->CastSpell(target, WARBRINGER_SLOW, true);
 
             // Glyph of Blazing Trail
             if (caster->HasAura(BLAZING_TRAIL))
@@ -1395,7 +1398,7 @@ class spell_warr_charge : public SpellScriptLoader
 
         void Register()
         {
-            BeforeHit += SpellHitFn(script_impl::HandleCharge);
+            OnEffectHitTarget += SpellEffectFn(script_impl::HandleCharge, EFFECT_0, SPELL_EFFECT_CHARGE);
             OnEffectHitTarget += SpellEffectFn(script_impl::HandleDummy, EFFECT_1, SPELL_EFFECT_DUMMY);
         }
     };
